@@ -6,23 +6,33 @@ void setup()
     pinMode(GATE, OUTPUT);
     digitalWrite(GATE, LOW);
     pinMode(OPAMP, INPUT_PULLUP);
-    attachInterrupt(digitalPinToInterrupt(3), toggle, RISING);
+    attachInterrupt(digitalPinToInterrupt(OPAMP), time, CHANGE);
 }
 
-volatile byte pulses = 0;
-byte STATE = LOW;
+unsigned long start = 0, stop = 0xFFFFFFFFFFFFFFFF;
+uint8_t gate_state = LOW;
 
 void loop()
 {
-    if(pulses > 2)
+    if(stop - start < 25)
     {
-        pulses = 0;
-        STATE = (STATE + 1) % 2;
-        digitalWrite(GATE, STATE);
+        gate_state = (gate_state + 1) % 2;
+        digitalWrite(GATE, gate_state);
+        stop = 0xFFFFFFFFFFFFFFFF;
+        start = 0;
+
+        attachInterrupt(digitalPinToInterrupt(OPAMP), time, CHANGE);
     }
 }
 
-void toggle()
+void time()
 {
-    pulses++;
+    detachInterrupt(digitalPinToInterrupt(OPAMP));
+    
+    uint8_t state = digitalRead(OPAMP);
+    
+    if(state == HIGH)
+        start = millis(); //start counter
+    else
+        stop = millis(); //stop counter
 }
