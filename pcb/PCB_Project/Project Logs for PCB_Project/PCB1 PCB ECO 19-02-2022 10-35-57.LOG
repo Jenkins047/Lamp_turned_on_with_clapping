@@ -1,0 +1,5 @@
+Change Component Designator: OldDesignator=Rf NewDesignator=R4
+Change Component Designator: OldDesignator=RIN NewDesignator=R3
+Change Net Name : Old Net Name=NetRf_1 New Net Name=NetR3_2
+Change Net Name : Old Net Name=NetRf_2 New Net Name=NetR4_2
+Added Room: Name=Lamp_Driver

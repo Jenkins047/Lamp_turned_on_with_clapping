@@ -1,0 +1,4 @@
+Removed Member From Class: ClassName=Lamp_Driver Member=U?
+Change Component Designator: OldDesignator=U? NewDesignator=U1
+Change Net Name : Old Net Name=NetU2_8 New Net Name=NetU1_3
+Added Member To Class: ClassName=Lamp_Driver Member=Component U1 LM358P
